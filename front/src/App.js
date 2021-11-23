@@ -6,7 +6,6 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import './App.css';
 
-
 function App(props) {
   return (
     <ConnectedRouter history={props.history}>

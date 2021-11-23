@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import * as actionCreators from '../store/actions/actionCreators';
 import { connect } from 'react-redux';
 
+const Web3 = require('web3');
+const url = "https://eth-ropsten.alchemyapi.io/v2/6xvB_IFEiLUg5uLrROiwjqj_nP-3qMBO"
+const web3 = new Web3(url)
+
 class Login extends Component {
     state={email:'', password:''}
 
@@ -15,11 +19,12 @@ class Login extends Component {
         }
     }
 
-    componentDidMount(){
-        this.props.checkLogin();
-    }
-
     render() {
+        let address = "0xcACad72D9827f9C8DEbD75d7ec3b9D1Adf2354f2";
+        web3.eth.getBalance(address).then(wei => {
+            let balance = web3.utils.fromWei(wei, 'ether')
+            console.log(balance);
+        })
         return (
             <div className="Login">
                 <dir>
