@@ -1,23 +1,28 @@
 import React from 'react';
-import Login from './containers/login';
-import Logout from './containers/logout';
-import Articles from './containers/articles';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
+import ViewPage from './containers/viewPage';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Web3ReactProvider } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 import './App.css';
 
-function App(props) {
+function getLibrary(provider) {
+  const library = new Web3Provider(provider)
+  library.pollingInterval = 12000
+  return library
+}
+
+function App() {
   return (
-    <ConnectedRouter history={props.history}>
-      <Logout/>
-      <div className="App">
-        <Switch>
-          <Route exact path='/login' component={Login}/>
-          <Route exact path='/articles' component={Articles}/>
-          <Redirect from='/' to='/login'/>
-        </Switch>
-      </div>
-    </ConnectedRouter>
+    <div className="App">
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/view' component={ViewPage}/>
+            <Redirect exact apth='/' to='/view'/>
+          </Switch>
+        </BrowserRouter>
+      </Web3ReactProvider>
+    </div>
   );
 }
 
