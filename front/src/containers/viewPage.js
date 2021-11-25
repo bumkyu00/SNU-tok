@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { InjectedConnector } from '@web3-react/injected-connector';
-import { useWeb3React } from '@web3-react/core'
-import { Contract } from '@ethersproject/contracts'
+import { useWeb3React } from '@web3-react/core';
+import { Contract } from '@ethersproject/contracts';
 import './viewPage.css';
 
 const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
@@ -404,10 +404,11 @@ function getContract(address, ABI, library, account) {
 function ViewPage(){
 	const context = useWeb3React();
 	const {connector, library, chainId, account, activate, deactivate, active, error} = context;
-	const [url , setUrl] = useState("https://www.youtube.com/embed/9j3BtLzqywQ");
+	const [url , setUrl] = useState("");
 	const [index, setIndex] = useState(0);
 	const [totalNum, setTotalNum] = useState(0);
 	const [balance, setBalance] = useState(0);
+	const [newUrl, setNewUrl] = useState("");
 	const contract = getContract(contractAddress, abi, library, account);
 	const check = async () => {
 		let isAuthorized = await injected.isAuthorized()
@@ -432,13 +433,9 @@ function ViewPage(){
 					let video = await contract.getVideo(index);
 					let num = await contract.getVideoNum();
 					let bal = await contract.balanceOf(account);
-					//console.log("totalNum1");
-					//console.log(totalNum);
 					setTotalNum(num);
 					setUrl("https://www.youtube.com/embed/" + video.url.substring(32));
 					setBalance(parseInt(bal['_hex']));
-					//console.log("bal");
-					//console.log(parseInt(bal['_hex']));
 				}
 			} catch(err) {
 				console.error(err);
@@ -450,10 +447,8 @@ function ViewPage(){
 	}, []);
 	useEffect(() => {
 		update();
-    }, [account, library, chainId, active, activate, index, balance]);
+    }, [account, library, chainId, active, index, balance]);
 	
-	//console.log("asfasdfasfasf");
-
 	const incrementIndex = async () => {
 		update();
 		let num = await contract.getVideoNum();
@@ -467,12 +462,24 @@ function ViewPage(){
 		console.log(index);
 	}
 
+	const addVideo = async () => {
+		check();
+		let res = await contract.addurl(newUrl);
+		console.log(res);
+	}
+
     return (
-        <div>
+        <div class='page'>
             <h1>View Video</h1>
-            <button id='change' onClick = {() => incrementIndex()}>Change</button>
-            {<iframe width="560" height="315" src={url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
-			<h3>Current Balance: {balance}</h3>
+			<div>
+            	{url && <iframe class='item' width="50%" height="500px" src={url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
+			</div>
+			<div>
+				<button class='button' onClick = {() => incrementIndex()}>Change</button>
+				<input id='input' value={newUrl} onChange={(event) => setNewUrl(event.target.value)}></input>
+				<button class='button' onClick = {() => addVideo()}>Add Video</button>
+				<h3>Current Balance: {balance}</h3>
+			</div>
 		</div>
     );
 }
