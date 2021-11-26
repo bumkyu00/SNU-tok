@@ -410,6 +410,14 @@ function ViewPage(){
 		}
 		console.log("check finish");
 	}
+
+	const init = async () => {
+		console.log("init start");
+		activate(injected);
+		check();
+		console.log("init finish");
+	}
+
 	const update = async () => {
 		console.log("update start");
 		let isAuthorized = await injected.isAuthorized()
@@ -437,7 +445,7 @@ function ViewPage(){
 	};
 
 	useEffect(() => {
-		check();
+		init();
 	}, []);
 	useEffect(() => {
 		update();
