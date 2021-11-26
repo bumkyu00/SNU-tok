@@ -3,10 +3,109 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 import { useWeb3React } from '@web3-react/core';
 import { Contract } from '@ethersproject/contracts';
 import './viewPage.css';
+import heartImage from '../img/heart.png';
 
 const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
 
 const abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "newUrl",
+				"type": "string"
+			}
+		],
+		"name": "addVideo",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "subtractedValue",
+				"type": "uint256"
+			}
+		],
+		"name": "decreaseAllowance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "giveHeart",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -38,6 +137,30 @@ const abi = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "addedValue",
+				"type": "uint256"
+			}
+		],
+		"name": "increaseAllowance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -65,15 +188,44 @@ const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "newUrl",
-				"type": "string"
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
 			}
 		],
-		"name": "addurl",
-		"outputs": [],
+		"name": "transferFrom",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "newIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "videoAdded",
+		"type": "event"
 	},
 	{
 		"inputs": [
@@ -97,30 +249,6 @@ const abi = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -153,30 +281,6 @@ const abi = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "subtractedValue",
-				"type": "uint256"
-			}
-		],
-		"name": "decreaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -229,43 +333,6 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			}
-		],
-		"name": "giveHeart",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "addedValue",
-				"type": "uint256"
-			}
-		],
-		"name": "increaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "name",
 		"outputs": [
@@ -303,91 +370,9 @@ const abi = [
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "sender",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "videoList",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "url",
-				"type": "string"
-			},
-			{
-				"internalType": "address payable",
-				"name": "owner",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	}
 ];
-const contractAddress = "0xD6cB47402dC187a7939636967E0790d20aed5e77";
+const contractAddress = "0xFd5CD7b087124e609c48644538A456D63D2d4635";
 
 function getSigner(library, account) {
 	return library.getSigner(account).connectUnchecked()
@@ -410,7 +395,9 @@ function ViewPage(){
 	const [balance, setBalance] = useState(0);
 	const [newUrl, setNewUrl] = useState("");
 	const contract = getContract(contractAddress, abi, library, account);
+
 	const check = async () => {
+		console.log("check start");
 		let isAuthorized = await injected.isAuthorized()
 		console.log("isAuthorized");
 		console.log(isAuthorized);
@@ -420,9 +407,11 @@ function ViewPage(){
 			} catch(err) {
 				console.error(err);
 			}
-		}	
+		}
+		console.log("check finish");
 	}
 	const update = async () => {
+		console.log("update start");
 		let isAuthorized = await injected.isAuthorized()
 		console.log("isAuthorized");
 		console.log(isAuthorized);
@@ -430,6 +419,9 @@ function ViewPage(){
 			try {
 				await activate(injected);
 				if(!!library && !!account) {
+					if(index === undefined || index === null || isNaN(index)){
+						setIndex(0);
+					}
 					let video = await contract.getVideo(index);
 					let num = await contract.getVideoNum();
 					let bal = await contract.balanceOf(account);
@@ -440,8 +432,10 @@ function ViewPage(){
 			} catch(err) {
 				console.error(err);
 			}
-		}	
+		}
+		console.log("update finish");
 	};
+
 	useEffect(() => {
 		check();
 	}, []);
@@ -450,6 +444,7 @@ function ViewPage(){
     }, [account, library, chainId, active, index, balance]);
 	
 	const incrementIndex = async () => {
+		console.log("increment start");
 		update();
 		let num = await contract.getVideoNum();
 		console.log("totalNum2");
@@ -460,12 +455,24 @@ function ViewPage(){
 		}
 		console.log("index");
 		console.log(index);
+		console.log("increment finish");
 	}
 
 	const addVideo = async () => {
+		console.log("addVideo start");
 		check();
-		let res = await contract.addurl(newUrl);
-		console.log(res);
+		contract.addVideo(newUrl);
+		contract.on('videoAdded', (newIndex) => {
+			setIndex(newIndex['_hex']);
+		})
+		console.log("addVideo finish");
+	}
+
+	const giveHeart = async () => {
+		console.log("giveHeart start");
+		check();
+		contract.giveHeart(index);
+		console.log("giveHeart finish");
 	}
 
     return (
@@ -475,6 +482,7 @@ function ViewPage(){
             	{url && <iframe class='item' width="50%" height="500px" src={url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
 			</div>
 			<div>
+			<button id='like'><img id='heart' src={heartImage} alt='heart' onClick = {() => giveHeart()}/></button>
 				<button class='button' onClick = {() => incrementIndex()}>Change</button>
 				<input id='input' value={newUrl} onChange={(event) => setNewUrl(event.target.value)}></input>
 				<button class='button' onClick = {() => addVideo()}>Add Video</button>
