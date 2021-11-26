@@ -446,6 +446,7 @@ function ViewPage(){
 
 	useEffect(() => {
 		init();
+		update();
 	}, []);
 	useEffect(() => {
 		update();
