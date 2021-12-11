@@ -20,12 +20,17 @@
     margin: 4px;
     cursor: pointer;
     background-color: #ff3258;
-    border-color: #b11834
+    border-color: #b11834;
+    line-height: 3px;
+    font-size: 30px;
+    color: #ffffff;
 }
 
 #heart {
     width: 40px;
     height: 40px;
+    vertical-align: middle;
+    line-height: 3px;
 }
 
 #input {

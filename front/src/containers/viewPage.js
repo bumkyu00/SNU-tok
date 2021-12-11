@@ -9,104 +9,6 @@ const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
 
 const abi = [
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "newUrl",
-				"type": "string"
-			}
-		],
-		"name": "addVideo",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "subtractedValue",
-				"type": "uint256"
-			}
-		],
-		"name": "decreaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			}
-		],
-		"name": "giveHeart",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -137,30 +39,6 @@ const abi = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "addedValue",
-				"type": "uint256"
-			}
-		],
-		"name": "increaseAllowance",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -186,35 +64,6 @@ const abi = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "sender",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -226,6 +75,19 @@ const abi = [
 		],
 		"name": "videoAdded",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "newUrl",
+				"type": "string"
+			}
+		],
+		"name": "addVideo",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -249,6 +111,30 @@ const abi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -286,6 +172,30 @@ const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "subtractedValue",
+				"type": "uint256"
+			}
+		],
+		"name": "decreaseAllowance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "index",
 				"type": "uint256"
@@ -304,6 +214,11 @@ const abi = [
 						"internalType": "string",
 						"name": "url",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "heart",
+						"type": "uint256"
 					},
 					{
 						"internalType": "address payable",
@@ -330,6 +245,43 @@ const abi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "giveHeart",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "addedValue",
+				"type": "uint256"
+			}
+		],
+		"name": "increaseAllowance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -370,9 +322,62 @@ const abi = [
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ];
-const contractAddress = "0xFd5CD7b087124e609c48644538A456D63D2d4635";
+const contractAddress = "0x4A63b602C5198f9126425bE8A34ABDA1D43a69f2";
 
 function getSigner(library, account) {
 	return library.getSigner(account).connectUnchecked()
@@ -389,11 +394,12 @@ function getContract(address, ABI, library, account) {
 function ViewPage(){
 	const context = useWeb3React();
 	const {connector, library, chainId, account, activate, deactivate, active, error} = context;
-	const [url , setUrl] = useState("");
-	const [index, setIndex] = useState(0);
-	const [totalNum, setTotalNum] = useState(0);
-	const [balance, setBalance] = useState(0);
-	const [newUrl, setNewUrl] = useState("");
+	const [url , setUrl] = useState("");			//Url of current video
+	const [index, setIndex] = useState(0);			//Index of current video
+	const [heartNum, setHeartNum] = useState(0);	//Number of hearts of current video
+	const [totalNum, setTotalNum] = useState(0);	//Total number of videos on chain
+	const [balance, setBalance] = useState(0);		//My balance
+	const [newUrl, setNewUrl] = useState("");		//New url to add
 	const contract = getContract(contractAddress, abi, library, account);
 
 	const check = async () => {
@@ -435,6 +441,7 @@ function ViewPage(){
 					let bal = await contract.balanceOf(account);
 					setTotalNum(num);
 					setUrl("https://www.youtube.com/embed/" + video.url.substring(32));
+					setHeartNum(video.heart['_hex']);
 					setBalance(parseInt(bal['_hex']));
 				}
 			} catch(err) {
@@ -491,7 +498,7 @@ function ViewPage(){
             	{url && <iframe class='item' width="50%" height="500px" src={url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
 			</div>
 			<div>
-			<button id='like'><img id='heart' src={heartImage} alt='heart' onClick = {() => giveHeart()}/></button>
+				<button id='like'><img id='heart' src={heartImage} alt='heart' onClick = {() => giveHeart()}/>{parseInt(heartNum)}</button>
 				<button class='button' onClick = {() => incrementIndex()}>Change</button>
 				<input id='input' value={newUrl} onChange={(event) => setNewUrl(event.target.value)}></input>
 				<button class='button' onClick = {() => addVideo()}>Add Video</button>
